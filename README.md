@@ -1,6 +1,12 @@
 # IAD Chat Application 
 Cette application de chat PHP basé sur le modèle MVC.
 
+
+## Logiciels requis
+
+-   PHP **7+**
+-   Postgres **9.7+** (Recommended **12**)
+
 ## Installation
 C'est rapide en plus !
 
