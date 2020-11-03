@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: docker/Dockerfile
     container_name: app
-    tty: true
+    tty: true 
     working_dir: /var/www
     volumes:
       - ./:/var/www
@@ -15,7 +15,7 @@ services:
     container_name: webserver
     restart: always
     ports:
-      - "8080:80"
+      - "8081:80"
     depends_on:
       - web-pgsql
       
@@ -31,7 +31,7 @@ services:
         container_name: web-pgsql
         volumes:
            - ./initdb.sh:/docker-entrypoint-initdb.d/initdb.sh
-           - /docker/data:/var/lib/postgresql/data
+           - ./docker/data:/var/lib/postgresql/data
         ports:
            - ${DB_PORT}:5432
         environment:
