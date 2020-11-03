@@ -1,0 +1,21 @@
+{% extends "default.html.twig" %}
+{% block content %}
+    <h1>Connexion</h1>
+
+    {% if error_login %}
+        <p class="error">{{ error_login }}</p>
+    {% endif %}
+ 
+
+    <form method="post">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required="true">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="passwd" id="password" required="true">
+        </div>
+        <input type="submit" name="login" value="Connexion" class="btn btn-primary">
+    </form>
+{% endblock %}
