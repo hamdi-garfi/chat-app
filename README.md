@@ -8,7 +8,7 @@ C'est rapide en plus !
 1- Clonons le repository !
 
 ```
-git clone git@github.com:hamdi-garfi/app-chat-iad.git ./chat-app
+git clone https://github.com/hamdi-garfi/app-chat-iad.git ./chat-app
 ```
 2- Changer le dossier
 ```
