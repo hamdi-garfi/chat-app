@@ -25,7 +25,7 @@ class BaseController {
     protected $authRepository;
     protected $redirect;
     protected $session;
-    protected $twig ;
+    protected $twig;
 
     /**
      * Class constructor
@@ -41,21 +41,11 @@ class BaseController {
         $this->userRepository = new UserRepository($currentInstance->getDb());
         $this->authRepository = new AuthRepository($currentInstance->getDb());
         $this->redirect = new Redirect();
-        $this->viewPath = dirname(__DIR__) . '/src/Views/';
-
-        
+        // Tiwg templating
         $this->twig = new Environment(
-                new FilesystemLoader(dirname(__DIR__) . '/src/templates')
+                new FilesystemLoader(dirname(__DIR__)
+                        . '/src/templates')
         );
-    }
-
-    protected function render(string $view, array $variables = []): void {
-
-        ob_start();
-        extract($variables);
-        require($this->viewPath . str_replace('.', '/', $view) . '.php');
-        $content = ob_get_clean();
-        require($this->viewPath . 'templates/' . $this->template . '.php');
     }
 
     /**
