@@ -20,7 +20,7 @@ cd chat-app
 composer install 
 ```
 
-4- installer les dépendances (twig/dotenv)
+4- lancer l'application sur docker
 ```
 docker-compose up --build
 ```
