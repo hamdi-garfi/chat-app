@@ -15,13 +15,21 @@ git clone git@github.com:hamdi-garfi/app-chat-iad.git ./chat-app
 cd chat-app
 ```
 
-2- installer les dépendances (twig/dotenv)
+3- installer les dépendances (twig/dotenv)
 ```
 composer install 
 ```
-### Configuration
 
-Dans le fichier conf.php du répertoire conf/, remplissez les informations liées à la base de données que vous devez préalablement créer.
+4- installer les dépendances (twig/dotenv)
+```
+docker-compose up --build
+```
+### Usage
+Lancer l'application sur http://localhost:8080
 
-## Développement
+
+Configuration
+Dans le fichier .env, remplissez les informations liées à la base de données que vous devez préalablement créer.
+
+### Développement
 Eh oui !
