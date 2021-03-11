@@ -7,7 +7,7 @@ namespace App\Util;
  * Validate:
  *
  * @author Hamdi GARFI
- * @since 1.0.2
+ *  
  */
 class Validate {
 
@@ -31,7 +31,7 @@ class Validate {
      * @access public
      * @param array $source
      * @param integer $recordID [optional]
-     * @since 1.0.2
+     *  
      */
     public function __construct(array $source, $recordID = null) {
         $this->_Db = Database::getInstance();
@@ -44,7 +44,7 @@ class Validate {
      * @access private
      * @param string $input
      * @param string $error
-     * @since 1.0.2
+     *  
      */
     private function _addError($input, $error) {
         $this->_errors[$input][] = str_replace(['-', '_'], ' ', ucfirst(strtolower($error)));
@@ -55,7 +55,7 @@ class Validate {
      * @access public
      * @param array $inputs
      * @return Validate
-     * @since 1.0.2
+     *  
      */
     public function check(array $inputs) {
         $this->_errors = [];
@@ -78,7 +78,7 @@ class Validate {
      * Errors:
      * @access public
      * @return array
-     * @since 1.0.2
+     * 
      */
     public function errors() {
         return($this->_errors);
@@ -88,7 +88,7 @@ class Validate {
      * Passed:
      * @access public
      * @return boolean
-     * @since 1.0.2
+     *  
      */
     public function passed() {
         return($this->_passed);
@@ -101,7 +101,7 @@ class Validate {
      * @param string $value
      * @param array $rules
      * @return void
-     * @since 1.0.2
+     * 
      */
     private function _validate($input, $value, array $rules) {
         foreach ($rules as $rule => $ruleValue) {
@@ -125,7 +125,7 @@ class Validate {
      * @param string $value
      * @param string $ruleValue
      * @return void
-     * @since 1.0.2
+     * 
      */
     protected function filterRule($input, $value, $ruleValue) {
         switch ($ruleValue) {
@@ -149,7 +149,7 @@ class Validate {
      * @param string $value
      * @param string $ruleValue
      * @return void
-     * @since 1.0.2
+     * 
      */
     protected function matchesRule($input, $value, $ruleValue) {
         if ($value != $this->_source[$ruleValue]) {
@@ -168,7 +168,7 @@ class Validate {
      * @param string $value
      * @param string $ruleValue
      * @return void
-     * @since 1.0.2
+     *  
      */
     protected function maxCharactersRule($input, $value, $ruleValue) {
         if (strlen($value) > $ruleValue) {
@@ -187,7 +187,7 @@ class Validate {
      * @param string $value
      * @param string $ruleValue
      * @return void
-     * @since 1.0.2
+     * 
      */
     protected function minCharactersRule($input, $value, $ruleValue) {
         if (strlen($value) < $ruleValue) {
@@ -206,7 +206,7 @@ class Validate {
      * @param string $value
      * @param string $ruleValue
      * @return void
-     * @since 1.0.2
+     *  
      */
     protected function requiredRule($input, $value, $ruleValue) {
         if ($ruleValue === true and empty($value)) {
@@ -221,7 +221,7 @@ class Validate {
      * @param string $value
      * @param string $ruleValue
      * @return void
-     * @since 1.0.2
+     *  
      */
     protected function uniqueRule($input, $value, $ruleValue) {
         $check = $this->_Db->select($ruleValue, [$input, "=", $value]);
