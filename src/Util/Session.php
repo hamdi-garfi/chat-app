@@ -5,7 +5,7 @@ namespace App\Util;
 /**
  * Session:
  *
- * @since 1.0.1
+ * 
  */
 class Session {
 
@@ -14,7 +14,7 @@ class Session {
      * @access public
      * @param string $key
      * @return boolean
-     * @since 1.0.1
+     *  
      */
     public static function delete($key) {
         if (self::exists($key)) {
@@ -28,7 +28,7 @@ class Session {
      * Destroy: Deletes the session.
      * @access public
      * @return void
-     * @since 1.0.1
+     * 
      */
     public static function destroy() {
         session_destroy();
@@ -39,7 +39,7 @@ class Session {
      * @access public
      * @param string $key
      * @return boolean
-     * @since 1.0.1
+     *  
      */
     public static function exists($key) {
         return(isset($_SESSION[$key]));
@@ -50,7 +50,7 @@ class Session {
      * @access public
      * @param string $key
      * @return string|nothing
-     * @since 1.0.1
+     *  
      */
     public static function get($key) {
         if (self::exists($key)) {
@@ -62,7 +62,7 @@ class Session {
      * Init: Starts the session.
      * @access public
      * @return void
-     * @since 1.0.1
+     *  
      */
     public static function init() {
         // If no session exist, start the session.
@@ -77,7 +77,7 @@ class Session {
      * @param string $key
      * @param string $value
      * @return string
-     * @since 1.0.1
+     *  
      */
     public static function put($key, $value) {
         return($_SESSION[$key] = $value);
