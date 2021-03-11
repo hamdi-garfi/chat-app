@@ -5,9 +5,9 @@ namespace App\Util;
 use App\Util\Session;
 
 /**
- * Redirect:
  *
- * @since 1.0.1
+ * @description: Class Redirect 
+ *
  */
 class Redirect {
 
@@ -16,7 +16,7 @@ class Redirect {
      * @access public
      * @param string $location [optional]
      * @return void
-     * @since 1.0.1
+     *  
      */
     public function to($location = ""): void {
         if ($location) {
@@ -35,7 +35,7 @@ class Redirect {
      * @access public
      * @param NULL (Not defined)
      * @return void
-     * @since 1.0.1
+     * 
      */
     public function ifLogged(): void {
 
