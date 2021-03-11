@@ -33,7 +33,7 @@ services:
            - ./initdb.sh:/docker-entrypoint-initdb.d/initdb.sh
            - ./docker/data:/var/lib/postgresql/data
         ports:
-           - ${DB_PORT}:5432
+           - ${DB_PORT}:${DB_EXPORT_PORT}
         environment:
             - POSTGRES_USER=${DB_USER}
             - POSTGRES_PASSWORD=${DB_PASS}
