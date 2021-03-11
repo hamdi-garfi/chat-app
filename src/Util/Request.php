@@ -24,7 +24,7 @@ class Request {
      * @param array $inputs
      * @param integer $recordID [optional]
      * @return boolean
-     * @since 1.0.2
+     *  
      */
     public static function check(array $source, array $inputs, $recordID = null) {
         if (!Input::exists()) {
@@ -49,7 +49,7 @@ class Request {
      * @access public
      * @param string $source [optional]
      * @return boolean
-     * @since 1.0.1
+     *  
      */
     public static function exists($source = "post") {
         switch ($source) {
@@ -68,7 +68,7 @@ class Request {
      * @param string $key
      * @param mixed $default
      * @return mixed
-     * @since 1.0.1
+     *  
      */
     public static function get($key, $default = "") {
         return(isset($_GET[$key]) ? $_GET[$key] : $default);
@@ -81,7 +81,7 @@ class Request {
      * @param string $key
      * @param mixed $default
      * @return mixed
-     * @since 1.0.1
+     * 
      */
     public static function post($key, $default = "") {
         return(isset($_POST[$key]) ? $_POST[$key] : $default);
