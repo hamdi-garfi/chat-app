@@ -19,7 +19,7 @@ class Token {
      * Generate: Returns a CSRF token and generate a new one if expired.
      * @access public
      * @return string
-     * @since 1.0.1
+     *  
      */
     public static function generate() {
         $maxTime = 60 * 60 * 24;
@@ -40,7 +40,7 @@ class Token {
      * @access public
      * @param string $token
      * @return boolean
-     * @since 1.0.1
+     *  
      */
     public static function check($token) {
         return $token === Session::get(Config::get("SESSION_TOKEN")) and!empty($token);
