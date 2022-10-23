@@ -1,4 +1,4 @@
-FROM php:7.4-fpm
+FROM php:8.1.0-fpm
 
 ARG APCU_VERSION=5.1.18
 
