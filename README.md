@@ -21,12 +21,7 @@ git clone https://github.com/hamdi-garfi/app-chat-iad.git ./chat-app
 cd chat-app
 ```
 
-3- installer les dépendances (twig/dotenv)
-```
-composer install 
-```
-
-4- lancer l'application sur docker
+3- lancer l'application sur docker
 ```
 docker compose up --build
 ```
