@@ -28,7 +28,7 @@ composer install
 
 4- lancer l'application sur docker
 ```
-docker-compose up --build
+docker compose up --build
 ```
 ### Usage
 Lancer l'application sur http://localhost:8080
