@@ -52,18 +52,6 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 # php-cs-fixer tool
 RUN wget https://cs.symfony.com/download/php-cs-fixer-v2.phar -O /usr/local/bin/php-cs-fixer
 RUN chmod +x /usr/local/bin/php-cs-fixer
-
-
-# Install oh-my-zsh
-RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
-
-# Copy powerlevel10k zsh theme
-RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-
-# Change the default theme, so to differentiate in case you use the default theme on your host
-RUN sed -i 's:robbyrussell:powerlevel10k/powerlevel10k:g' ~/.zshrc
-
-# Use minimalist-ish powerlevel10k configuration, run "p10k configure" to go through wizard
   
 # Copy existing app directory
 COPY . /var/www
