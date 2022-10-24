@@ -83,7 +83,10 @@ RUN chown -R www-data:www-data /var/www
 
 # Copy and run composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
-RUN composer install --no-interaction
+
+RUN cd /var/www/
+
+RUN composer install
 
 # For Laravel Installations
 #RUN php artisan key:generate
