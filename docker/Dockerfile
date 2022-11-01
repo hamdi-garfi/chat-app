@@ -1,52 +1,67 @@
-version: '3'
-services:
-  app:
-    build:
-      context: .
-      dockerfile: docker/Dockerfile
-    ports:
-      - '9000:9000'
-    container_name: app
-    tty: true 
-    stdin_open: true
-    working_dir: /var/www
-    volumes:
-      - ./:/var/www
-   # command: sh -c "composer install --ignore-platform-reqs"
+FROM php:8.1.0-fpm
 
-  webserver:
-    image: nginx:stable
-    container_name: webserver
-    restart: always
-    ports:
-      - "8080:80"
-    depends_on:
-      - web-pgsql
-    volumes:
-      - ./:/var/www
-      - ./docker/app.conf:/etc/nginx/conf.d/default.conf
-    links:
-      - app
-          
-  web-pgsql:
-        image: postgres:alpine
-        restart: always
-        container_name: web-pgsql
-        volumes:
-           - ./initdb.sh:/docker-entrypoint-initdb.d/initdb.sh
-           - ./docker/data:/var/lib/postgresql/data
-        ports:
-           - ${DB_PORT}:${DB_EXPORT_PORT}
-        environment:
-            - POSTGRES_USER=${DB_USER}
-            - POSTGRES_PASSWORD=${DB_PASS}
-            - POSTGRES_DB=${DB_NAME}
-            - SCHEMA=public
-            - ANON=web_anon
-            - AUTHENTICATOR=authenticator
-            
-  composer:
-    image: composer:2.0
-    volumes:
-      - ./:/var/www
-    command: sh -c "composer install --working-dir=/var/www --ignore-platform-reqs"
+ARG APCU_VERSION=5.1.18
+
+LABEL Maintainer="Hamdi GARFI " \
+      Description=" PHP and PostgreSQL."
+
+
+# Copy existing app directory
+WORKDIR /var/www
+COPY . /var/www
+
+
+RUN curl -sS https://getcomposer.org/installer | \
+    php -- --install-dir=/usr/bin/ --filename=composer
+
+# Get frequently used tools
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libicu-dev \
+    libzip-dev \
+    libpng-dev \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
+    libonig-dev \
+    locales \
+    zip \
+    unzip \
+    vim \
+    git \
+    curl \
+    wget 
+   
+
+ RUN apt-get install -y libpq-dev \
+    && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
+    && docker-php-ext-install pdo pdo_pgsql pgsql
+
+RUN docker-php-ext-configure zip
+
+RUN docker-php-ext-install \
+        bcmath \
+        mbstring \
+        pcntl \
+        intl \
+        zip \
+        opcache
+
+# apcu for caching, xdebug for debugging and also phpunit coverage
+RUN pecl install \
+        apcu-${APCU_VERSION} \
+        xdebug \
+    && docker-php-ext-enable \
+        apcu \
+        xdebug
+
+
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# php-cs-fixer tool
+RUN wget https://cs.symfony.com/download/php-cs-fixer-v2.phar -O /usr/local/bin/php-cs-fixer
+RUN chmod +x /usr/local/bin/php-cs-fixer
+
+
+ 
+EXPOSE 8080
+CMD ["php-fpm"]
