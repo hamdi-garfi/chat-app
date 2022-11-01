@@ -4,12 +4,15 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile
+    ports:
+      - '9000:9000'
     container_name: app
     tty: true 
+    stdin_open: true
     working_dir: /var/www
     volumes:
       - ./:/var/www
-    command: sh -c "composer install --ignore-platform-reqs"
+   # command: sh -c "composer install --ignore-platform-reqs"
 
   webserver:
     image: nginx:stable
@@ -19,7 +22,6 @@ services:
       - "8080:80"
     depends_on:
       - web-pgsql
-      
     volumes:
       - ./:/var/www
       - ./docker/app.conf:/etc/nginx/conf.d/default.conf
@@ -27,7 +29,7 @@ services:
       - app
         
   web-pgsql:
-        image: postgres:15.0-alpine
+        image: postgres:alpine
         restart: always
         container_name: web-pgsql
         volumes:
