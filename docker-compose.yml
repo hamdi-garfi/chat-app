@@ -9,6 +9,7 @@ services:
     working_dir: /var/www
     volumes:
       - ./:/var/www
+    command: sh -c "composer install --ignore-platform-reqs"
 
   webserver:
     image: nginx:stable
@@ -26,7 +27,7 @@ services:
       - app
         
   web-pgsql:
-        image: postgres:alpine
+        image: postgres:15.0-alpine
         restart: always
         container_name: web-pgsql
         volumes:
@@ -41,5 +42,5 @@ services:
             - SCHEMA=public
             - ANON=web_anon
             - AUTHENTICATOR=authenticator
-  
+            
  
