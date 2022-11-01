@@ -11,9 +11,6 @@ WORKDIR /var/www
 COPY . /var/www
 
 
-RUN curl -sS https://getcomposer.org/installer | \
-    php -- --install-dir=/usr/bin/ --filename=composer
-
 # Get frequently used tools
 RUN apt-get update && apt-get install -y \
     build-essential \
@@ -54,13 +51,11 @@ RUN pecl install \
         apcu \
         xdebug
 
-
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # php-cs-fixer tool
 RUN wget https://cs.symfony.com/download/php-cs-fixer-v2.phar -O /usr/local/bin/php-cs-fixer
 RUN chmod +x /usr/local/bin/php-cs-fixer
-
 
  
 EXPOSE 8080
