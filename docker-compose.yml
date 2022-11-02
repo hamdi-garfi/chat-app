@@ -3,7 +3,7 @@ services:
   app:
     build:
       context: .
-      dockerfile: docker/Dockerfile
+      dockerfile: .docker/Dockerfile
     ports:
       - '9000:9000'
     container_name: app
@@ -23,7 +23,7 @@ services:
       - web-pgsql
     volumes:
       - ./:/var/www
-      - ./docker/app.conf:/etc/nginx/conf.d/default.conf
+      - ./.docker/app.conf:/etc/nginx/conf.d/default.conf
     links:
       - app
           
@@ -32,8 +32,8 @@ services:
         restart: always
         container_name: web-pgsql
         volumes:
-           - ./docker/conf/postgres/initdb.sh:/docker-entrypoint-initdb.d/initdb.sh
-           - ./docker/data:/var/lib/postgresql/data
+           - ./.docker/conf/postgres/initdb.sh:/docker-entrypoint-initdb.d/initdb.sh
+           - ./.docker/data:/var/lib/postgresql/data
         ports:
            - ${DB_PORT}:${DB_EXPORT_PORT}
         environment:

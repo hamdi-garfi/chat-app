@@ -18,12 +18,11 @@ class DefaultController extends BaseController {
      * @return mixed
      *
      */
-    public function login():mixed{
+    public function login(): mixed {
 
         Auth::checkUnauthenticated();
 
         $error_login = '';
-        $error_subscribe = '';
 
         if (Request::exists() && Request::post("login")) {
 
@@ -32,19 +31,18 @@ class DefaultController extends BaseController {
             $user = $this->userRepository->findByUsername($username);
 
             if (is_object($user)) {
-                if (\password_verify($passwd, $user->getPassword())) {
+                if (\password_verify($passwd, $user->getPassword())):
                     Session::put('auth', $user->getId());
                     $this->redirect->to("chat.index");
-                } else {
+                else:
                     $error_login = 'Mot de passe incorrect';
-                }
+                endif;
             } else {
-
-                if (!is_null($_POST['username']) && !is_null($_POST['passwd'])) {
+                if (!is_null(Request::post('username')) && !is_null(Request::post('passwd'))) {
                     $user = new User([
-                        "name" => $_POST['username'],
-                        "password" => password_hash($_POST['passwd'], PASSWORD_BCRYPT),
-                        "username" => $_POST['username'],
+                        "name" => Request::post('username'),
+                        "password" => password_hash(Request::post('passwd'), PASSWORD_BCRYPT),
+                        "username" => Request::post('username'),
                     ]);
 
                     $this->userRepository->add($user);
@@ -55,8 +53,8 @@ class DefaultController extends BaseController {
         }
 
         return $this->render(
-                'login/index.html.twig',
-                ["error_login" => $error_login, "error_subscribe" => $error_subscribe]
+                        'login/index.html.twig',
+                        ["error_login" => $error_login, "error_subscribe" => $error_subscribe]
         );
     }
 

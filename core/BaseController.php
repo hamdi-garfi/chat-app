@@ -49,17 +49,12 @@ class BaseController {
     }
 
     /**
-     * Magic method called when a non-existent or inaccessible method is
-     * called on an object of this class. Used to execute before and after
-     * filter methods on action methods. Action methods need to be named
-     * with an "Action" suffix, e.g. indexAction, showAction etc.
-     *
      * @param string $name  Method name
      * @param array $args Arguments passed to the method
      *
      * @return void
      */
-    public function __call($name, $args) {
+    public function __call(string $name, array $args = []) {
         $method = $name . 'Action';
 
         if (method_exists($this, $method)) {
@@ -86,8 +81,8 @@ class BaseController {
      * @param string|null $data
      * @return void
      */
-    protected function response(?string $data): void {
-        echo json_encode($data, JSON_INVALID_UTF8_IGNORE);
+    protected function response(mixed $data): void {
+        echo json_encode($data);
     }
 
     /**
