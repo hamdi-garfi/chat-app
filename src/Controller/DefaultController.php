@@ -4,11 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use Core\BaseController;
-use App\Util\{
-    Session,
-    Request,
-    Auth
-} ;
+use App\Util\{Session,Request,Auth } ;
 
 class DefaultController extends BaseController {
 
