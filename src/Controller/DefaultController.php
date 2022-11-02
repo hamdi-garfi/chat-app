@@ -23,9 +23,7 @@ class DefaultController extends BaseController {
         Auth::checkUnauthenticated();
 
         $error_login = '';
-
         if (Request::exists() && Request::post("login")) {
-
             $username = Request::post("username");
             $passwd = Request::post("passwd");
             $user = $this->userRepository->findByUsername($username);
@@ -39,6 +37,7 @@ class DefaultController extends BaseController {
                 endif;
             } else {
                 if (!is_null(Request::post('username')) && !is_null(Request::post('passwd'))) {
+                    
                     $user = new User([
                         "name" => Request::post('username'),
                         "password" => password_hash(Request::post('passwd'), PASSWORD_BCRYPT),
@@ -52,10 +51,7 @@ class DefaultController extends BaseController {
             }
         }
 
-        return $this->render(
-                        'login/index.html.twig',
-                        ["error_login" => $error_login, "error_subscribe" => $error_subscribe]
-        );
+        return $this->render('login/index.html.twig',["error_login" => $error_login]);
     }
 
 }
