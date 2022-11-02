@@ -15,13 +15,10 @@ class DefaultController extends BaseController {
     /**
      * Login: Processes a login request. NOTE: This controller can only be
      * accessed by unauthenticated users!
-     * @access public
-     * @example login/_login
-     * @return void
-     * @since 1.0.2
+     * @return mixed
      *
      */
-    public function login() {
+    public function login():mixed{
 
         Auth::checkUnauthenticated();
 
@@ -57,7 +54,7 @@ class DefaultController extends BaseController {
             }
         }
 
-        echo $this->twig->render(
+        return $this->render(
                 'login/index.html.twig',
                 ["error_login" => $error_login, "error_subscribe" => $error_subscribe]
         );

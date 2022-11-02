@@ -71,6 +71,24 @@ class BaseController {
             throw new \Exception("Method $method not found in controller " . get_class($this));
         }
     }
+    
+    /**
+     * 
+     * @param mixed $data
+     * @return void
+     */
+    protected function render(?string $path, ?array $parameters = []): void {
+        echo $this->twig->render($path,$parameters) ; 
+    }
+    
+    /**
+     * 
+     * @param string|null $data
+     * @return void
+     */
+    protected function response(?string $data): void {
+        echo json_encode($data, JSON_INVALID_UTF8_IGNORE);
+    }
 
     /**
      * Before filter - called before an action method.

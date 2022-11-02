@@ -2,18 +2,16 @@
 
 namespace App\Controller;
 
-use App\Entity\Message;
-use App\Entity\Auth as Connexion;
 use Core\BaseController;
-use App\Util\{
-    Session,
-    Request
-};
+use App\Entity\{Auth as Connexion,Message};
+use App\Util\{Session, Request};
 
 class ChatController extends BaseController {
 
+    /**
+     * 
+     */
     public function __construct() {
-
         parent::__construct();
         if (!Session::exists("auth")) {
             $this->redirect->to("default.login");
@@ -21,9 +19,10 @@ class ChatController extends BaseController {
     }
 
     /**
-     * IndexAction 
+     * 
+     * @return mixed
      */
-    public function index() {
+    public function index(): mixed {
 
         if (Request::exists("post")) {
             $message = new Message([
@@ -33,7 +32,7 @@ class ChatController extends BaseController {
             $this->messageRepository->add($message);
         }
         // Render page index
-        echo $this->twig->render('home/index.html.twig');
+        return $this->render('home/index.html.twig');
     }
 
     /**
@@ -54,7 +53,7 @@ class ChatController extends BaseController {
             endif;
         }
 
-        echo json_encode($response);
+        return $this->response($response);
     }
 
     public function checkConnection() {
@@ -93,7 +92,7 @@ class ChatController extends BaseController {
                             ->find($newConnexion->getUserid())->getName();
         }
 
-        echo json_encode($connectedUsers);
+        return $this->response($connectedUsers);
     }
 
     /**
