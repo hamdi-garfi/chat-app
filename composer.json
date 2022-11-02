@@ -1,5 +1,6 @@
 {
     "require": {
+        "doctrine/orm": "*" ,
         "symfony/dotenv": "^5.1",
         "twig/twig": "^3.1"
     },
