@@ -2,10 +2,10 @@
 
 namespace App\Repository;
 
-use Core\DatabaseManager;
+use Core\{DatabaseManager,Repository};
 use App\Entity\Message;
 
-class MessageRepository {
+class MessageRepository extends Repository{
 
     private $db;
 
