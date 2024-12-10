@@ -1,34 +1,34 @@
 # Basic Chat Application 
-Cette application de chat PHP basé sur le modèle MVC.
+This PHP chat application based on MVC pattern.
 
 
-## Logiciels requis
+## required software
 
 -   PHP **7+**
 -   Postgres **9.7+** (Recommended **12**)
 
-## Installation
-C'est rapide en plus !
+## Install
+It’s quick too!
 
-### Clonage du repository
-1- Clonons le repository !
+### Repository
+1- Clone the repository!
 
 ```
 git clone https://github.com/hamdi-garfi/app-chat-iad.git ./chat-app
 ```
-2- Changer le dossier
+2- change folder
 ```
 cd chat-app
 ```
 
-3- lancer l'application sur docker
+3- run the application on Docker
 ```
 docker compose up --build
 ```
 ### Usage
-Lancer l'application sur http://localhost:8080
+run the app on http://localhost:8080
 
 
-Configuration
-Dans le fichier .env, remplissez les informations liées à la base de données que vous devez préalablement créer.
+### Conf
+inside the file .env, fill in the information related to the database that you must first create.
 
